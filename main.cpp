@@ -1,11 +1,18 @@
 #include <iostream>
 #include <fstream>
-
+#include <unistd.h>
 using namespace std;
 
 void LogIn();
 void Register();
 void secret();
+
+class users
+{
+public:
+    string user;
+    string pass;
+}
 
 class student
 {
@@ -16,6 +23,8 @@ public:
 int main()
 {
     system("clear");
+    ofstream Fp;
+    Fp.open("users", ios::binary | ios::in);
     int init_choice;
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\t\t\t1.Log In" << endl;
@@ -27,7 +36,17 @@ int main()
     switch(init_choice)
     {
     case 1:
-        LogIn();
+        Fp.seekp(0, ios::end);
+        if (Fp.tellp() == 0)
+        {
+            cout << "\n\n\t\t--------------------------------------------" << endl;
+            cout << "\t\t\t\tFile is empty" << endl;
+            cout << "\t\t--------------------------------------------" << endl;
+            sleep(2);
+            main();
+        }
+        else
+            LogIn();
     case 2:
         Register();
     case 3:
