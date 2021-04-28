@@ -6,13 +6,16 @@ using namespace std;
 void LogIn();
 void Register();
 void secret();
+string key();
+
+string reg_key;
 
 class users
 {
 public:
     string user;
     string pass;
-}
+};
 
 class student
 {
@@ -79,4 +82,24 @@ void Register()
 void secret()
 {
     system("clear");
+    key();
+    cout << "\t\t--------------------------------------------" << endl;
+    cout << "\t\tYour secret REGISTRATION KEY is- " << reg_key << endl;
+    cout << "\t\t--------------------------------------------" << endl;
+    cout << "\t\tCopy it, it will be needed for registration" << endl;
+    cout << "\t\t\t   In 10s this will disappear" << endl;
+    sleep(10);
+    main();
+}
+
+string key()
+{
+    int i=8;
+    string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    int pos;
+    while(reg_key.size() != i) {
+        pos = ((rand() % (str.size() - 1)));
+        reg_key += str.substr(pos,1);
+    }
+    return reg_key;
 }
