@@ -26,7 +26,7 @@ public:
 int main()
 {
     system("clear");
-    ofstream Fp;
+    ifstream Fp;
     Fp.open("users", ios::binary | ios::in);
     int init_choice;
     cout << "\t\t--------------------------------------------" << endl;
@@ -39,8 +39,8 @@ int main()
     switch(init_choice)
     {
     case 1:
-        Fp.seekp(0, ios::end);
-        if (Fp.tellp() == 0)
+        Fp.seekg(0, ios::end);
+        if (Fp.tellg() == 0)
         {
             cout << "\n\n\t\t--------------------------------------------" << endl;
             cout << "\t\t\t\tFile is empty" << endl;
@@ -64,6 +64,10 @@ void LogIn()
 {
     string temp_name, temp_pass;
     system("clear");
+    ifstream Fp;
+    Fp.open("users", ios::binary | ios::in);
+    string temp_name, temp_pass;
+    Fp.read((char*)&)
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\t\tLog in with an authorised account" << endl;
     cout << "\t\t--------------------------------------------" << endl;
@@ -77,42 +81,52 @@ void LogIn()
 void Register()
 {
     system("clear");
-    string temp_name2, temp_pass2, temp_reg_key;
+    users Reg;
+    fstream Fp;
+    Fp.open("users", ios::binary | ios::in | ios::app);
+    string temp_user, temp_pass, temp_reg_key;
     cout << "\t\t--------------------------------------------" << endl;
-    cout << "\t\t\tLog in with an authorised account" << endl;
+    cout << "\t\t\t\tRegister" << endl;
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\t\t\tName- ";
-    cin >> temp_name2;
+    cin >> temp_user;
     cout << "\n\t\t\t\tPass- ";
-    cin >> temp_pass2;
-    cout << "\n\t\t\t\tReg.key ";
-    cin >> temp_reg;
-    if(reg_key == temp_reg)
+    cin >> temp_pass;
+    cout << "\n\t\t\t     Registration key- ";
+    cin >> temp_reg_key;
+    if(reg_key == temp_reg_key)
     {
         reg_key.clear();
-        cout << "\n\t\t\t\tSuccesfully registered ";
         cout << "\t\t--------------------------------------------" << endl;
+        cout << "\n\t\t\t\tSuccesfully registered"  << endl;
+        cout << "\t\t--------------------------------------------" << endl;
+        Reg.user = temp_user;
+        Reg.pass = temp_pass;
+        Fp.write((char*)&Reg, sizeof(Reg));
+        Fp.close();
         sleep(2);
         main();
     }
     else
     {
-        cout << "\n\t\t\t\tFailed, Registration key not matching";
+        cout << "\n\t\t\t\tFailed, Registration key not matching" << endl;
         cout << "\t\t--------------------------------------------" << endl;
         sleep(2);
+        main();
     }
 }
 
 void secret()
 {
     system("clear");
+    reg_key.clear();
     key();
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\tYour secret REGISTRATION KEY is- " << reg_key << endl;
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\tCopy it, it will be needed for registration" << endl;
     cout << "\t\t\t   In 10s this will disappear" << endl;
-    sleep(10);
+    sleep(2);
     main();
 }
 
