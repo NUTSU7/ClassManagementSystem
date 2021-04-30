@@ -77,7 +77,7 @@ void LogIn()
 void Register()
 {
     system("clear");
-    string temp_name2, temp_pass2, reg_key2;
+    string temp_name2, temp_pass2, temp_reg_key;
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\t\tLog in with an authorised account" << endl;
     cout << "\t\t--------------------------------------------" << endl;
@@ -86,8 +86,8 @@ void Register()
     cout << "\n\t\t\t\tPass- ";
     cin >> temp_pass2;
     cout << "\n\t\t\t\tReg.key ";
-    cin >> reg_key2;
-    if(reg_key == reg_key2)
+    cin >> temp_reg;
+    if(reg_key == temp_reg)
     {
         reg_key.clear();
         cout << "\n\t\t\t\tSuccesfully registered ";
