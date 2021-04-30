@@ -77,6 +77,30 @@ void LogIn()
 void Register()
 {
     system("clear");
+    string temp_name2, temp_pass2, reg_key2;
+    cout << "\t\t--------------------------------------------" << endl;
+    cout << "\t\t\tLog in with an authorised account" << endl;
+    cout << "\t\t--------------------------------------------" << endl;
+    cout << "\t\t\t\tName- ";
+    cin >> temp_name2;
+    cout << "\n\t\t\t\tPass- ";
+    cin >> temp_pass2;
+    cout << "\n\t\t\t\tReg.key ";
+    cin >> reg_key2;
+    if(reg_key == reg_key2)
+    {
+        reg_key.clear();
+        cout << "\n\t\t\t\tSuccesfully registered ";
+        cout << "\t\t--------------------------------------------" << endl;
+        sleep(2);
+        main();
+    }
+    else
+    {
+        cout << "\n\t\t\t\tFailed, Registration key not matching";
+        cout << "\t\t--------------------------------------------" << endl;
+        sleep(2);
+    }
 }
 
 void secret()
