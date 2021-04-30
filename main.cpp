@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
+#include <string>
 using namespace std;
 
 void LogIn();
@@ -62,20 +63,35 @@ int main()
 
 void LogIn()
 {
-    string temp_name, temp_pass;
     system("clear");
+    users log;
     ifstream Fp;
     Fp.open("users", ios::binary | ios::in);
-    string temp_name, temp_pass;
-    Fp.read((char*)&)
+    string temp_user, temp_pass;
+    Fp.seekg(0);
+    Fp.read((char*)&log, sizeof(log));
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\t\tLog in with an authorised account" << endl;
+    cout << log.user << endl;
+    cout << log.pass << endl;
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\t\t\tName- ";
-    cin >> temp_name;
+    cin >> temp_user;
     cout << "\n\t\t\t\tPass- ";
     cin >> temp_pass;
     cout << "\t\t--------------------------------------------" << endl;
+    if(log.user == temp_user)
+    {
+        if(log.pass == temp_pass)
+        {
+            cout << "\t\t--------------------------------------------" << endl;
+            cout << "\t\t\tSuccesfully logged in" << endl;
+            cout << "\t\t--------------------------------------------" << endl;
+            sleep(2);
+            main();
+            Fp.close();
+        }
+    }
 }
 
 void Register()
@@ -89,9 +105,9 @@ void Register()
     cout << "\t\t\t\tRegister" << endl;
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\t\t\tName- ";
-    cin >> temp_user;
+    cin >> Reg.user;
     cout << "\n\t\t\t\tPass- ";
-    cin >> temp_pass;
+    cin >> Reg.pass;
     cout << "\n\t\t\t     Registration key- ";
     cin >> temp_reg_key;
     if(reg_key == temp_reg_key)
@@ -100,8 +116,8 @@ void Register()
         cout << "\t\t--------------------------------------------" << endl;
         cout << "\n\t\t\t\tSuccesfully registered"  << endl;
         cout << "\t\t--------------------------------------------" << endl;
-        Reg.user = temp_user;
-        Reg.pass = temp_pass;
+        //Reg.user = temp_user;
+        //Reg.pass = temp_pass;
         Fp.write((char*)&Reg, sizeof(Reg));
         Fp.close();
         sleep(2);
@@ -109,7 +125,7 @@ void Register()
     }
     else
     {
-        cout << "\n\t\t\t\tFailed, Registration key not matching" << endl;
+        cout << "\n\t\t\tFailed, Registration key not matching" << endl;
         cout << "\t\t--------------------------------------------" << endl;
         sleep(2);
         main();
@@ -126,7 +142,7 @@ void secret()
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\tCopy it, it will be needed for registration" << endl;
     cout << "\t\t\t   In 10s this will disappear" << endl;
-    sleep(2);
+    sleep(4);
     main();
 }
 
