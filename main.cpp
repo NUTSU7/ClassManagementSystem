@@ -1,6 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include <string>
 using namespace std;
 
@@ -10,12 +13,13 @@ void secret();
 string key();
 
 string reg_key;
+char user_local[10][10], pass_local[10][10];
 
 class users
 {
 public:
-    string user;
-    string pass;
+    char user[10];
+    char pass[10];
 };
 
 class student
@@ -65,11 +69,17 @@ void LogIn()
 {
     system("clear");
     users log;
+    int i=0;
     ifstream Fp;
     Fp.open("users", ios::binary | ios::in);
     string temp_user, temp_pass;
     Fp.seekg(0);
     Fp.read((char*)&log, sizeof(log));
+    //{
+    //    user_local[i] = log.user;
+    //    pass_local[i] = log.pass;
+    //    i++;
+    //}
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\t\tLog in with an authorised account" << endl;
     cout << log.user << endl;
@@ -100,7 +110,7 @@ void Register()
     users Reg;
     fstream Fp;
     Fp.open("users", ios::binary | ios::in | ios::app);
-    string temp_user, temp_pass, temp_reg_key;
+    string temp_reg_key;
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\t\t\tRegister" << endl;
     cout << "\t\t--------------------------------------------" << endl;
@@ -116,8 +126,6 @@ void Register()
         cout << "\t\t--------------------------------------------" << endl;
         cout << "\n\t\t\t\tSuccesfully registered"  << endl;
         cout << "\t\t--------------------------------------------" << endl;
-        //Reg.user = temp_user;
-        //Reg.pass = temp_pass;
         Fp.write((char*)&Reg, sizeof(Reg));
         Fp.close();
         sleep(2);
@@ -142,6 +150,7 @@ void secret()
     cout << "\t\t--------------------------------------------" << endl;
     cout << "\t\tCopy it, it will be needed for registration" << endl;
     cout << "\t\t\t   In 10s this will disappear" << endl;
+    cout << "\t\t--------------------------------------------" << endl;
     sleep(4);
     main();
 }
